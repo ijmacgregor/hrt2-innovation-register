@@ -1,0 +1,45 @@
+<mvc:View
+	controllerName="sap.ui.demo.basicTemplate.controller.Home"
+	displayBlock="true"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		id="page"
+		title="{i18n>title}">
+		<content>
+
+			<Table items="{ path: '/suggestions', sorter: { path: 'submittedOn' } }" noDataText="No suggestions" mode="Delete" delete=".onDeleteSuggestion">
+				<headerToolbar>
+					<Toolbar>
+						<ToolbarSpacer />
+						<Button icon="sap-icon://create" press=".onCreateSuggestion" type="Emphasized" text="Add suggestion" />
+						<Button icon="sap-icon://refresh" press=".onRefreshData" />
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					
+					<Column hAlign="Center" width="200px"><header><Label text="Submitted on" /></header></Column>
+					<Column><header><Label text="Submitted by" /></header></Column>
+					<Column><header><Label text="Title" /></header></Column>
+					<Column><header><Label text="Description" /></header></Column>
+					<Column hAlign="Center" width="300px"><header><Label text="On roadmap" /></header></Column>
+					<Column><header><Label text="Status" /></header></Column>
+				</columns>
+				<items>
+					<ColumnListItem vAlign="Middle" type="Detail" detailPress=".onEditSuggestion">
+						<cells>
+							
+							<Text text="{ path: 'submittedOn', type: 'sap.ui.model.type.DateTime', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSS+Z' } , strictParsing: false, pattern: 'dd/MM/yyyy HH:mm' } }" />
+							<Text text="{submittedBy}" />
+							<Text text="{suggestionTitle}" />
+							<Text text="{suggestionDescription}" maxLines="1" />
+							<CheckBox selected="{onProductRoadmap}" editable="false" />
+							<Link text="{suggestionStatus}" />
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+
+		</content>
+	</Page>
+</mvc:View>
